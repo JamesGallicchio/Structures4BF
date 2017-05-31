@@ -4,7 +4,7 @@ import java.io.FileNotFoundException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-public class BFFileInterpretter {
+public class BFFileInterpreter {
 
     public static void main(String[] args) {
         if (args.length == 0) {
@@ -16,6 +16,7 @@ public class BFFileInterpretter {
                 byte[] bytes = Files.readAllBytes(Paths.get(args[0]));
                 BFInterpreter interp = new BFInterpreter(bytes, System.in, System.out);
                 interp.run();
+                System.out.println();
             } catch (FileNotFoundException e) {
                 System.out.println("Can't find that file!");
             } catch (Exception e) {

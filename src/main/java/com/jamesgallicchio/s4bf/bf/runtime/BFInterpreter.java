@@ -40,9 +40,11 @@ public class BFInterpreter {
             byte b = bytes[comPointer];
             switch(b) {
                 case BFByteFormat.IN: //In
-                    memory[memPointer] = (byte) in.read(); break;
+                    out.write("Enter character input: ".getBytes());
+                    out.flush();
+                    memory[memPointer] = (byte) in.read(); in.skip(in.available()); break;
                 case BFByteFormat.OUT: //Out
-                    out.write(memory[memPointer]); break;
+                    out.write(memory[memPointer]); out.flush(); break;
                 case BFByteFormat.UP: //++
                     memory[memPointer]++; break;
                 case BFByteFormat.DOWN: //--
@@ -75,7 +77,7 @@ public class BFInterpreter {
                         }
                     } else {
                         leftBracs.add(comPointer);
-                    }
+                    } break;
                 case BFByteFormat.BRAC_RIGHT: //]
                     if (memory[memPointer] != 0) {
                         comPointer = leftBracs.get(leftBracs.size()-1);
@@ -85,7 +87,7 @@ public class BFInterpreter {
                         }
 
                         leftBracs.remove(leftBracs.size()-1);
-                    }
+                    } break;
                 default:
                     throw new BFSyntaxException("Encountered an invalid byte!", bytes, comPointer);
             }

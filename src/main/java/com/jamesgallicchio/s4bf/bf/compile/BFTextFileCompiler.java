@@ -14,7 +14,7 @@ public class BFTextFileCompiler {
             try {
                 Path p = Paths.get(args[0]);
                 String program = new String(Files.readAllBytes(p));
-                p = p.resolveSibling(p.getFileName().toString().split(".")[0] + ".bf");
+                p = p.resolveSibling(p.getFileName().toString().split("\\.")[0] + ".bf");
                 Files.write(p, BFCompiler.compile(program));
             } catch (FileNotFoundException e) {
                 System.out.println("File couldn't be found.");
